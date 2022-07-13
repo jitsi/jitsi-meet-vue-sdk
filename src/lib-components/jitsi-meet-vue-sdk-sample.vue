@@ -23,52 +23,23 @@ export default /*#__PURE__*/defineComponent({
     };
   },
   computed: {
-    changedBy() {
-      const { message } = this as SampleData;
-      if (!message.action) return 'initialized';
-      return `${message.action} ${message.amount || ''}`.trim();
-    },
   },
   methods: {
-    increment(arg: Event | number): void {
-      const amount = (typeof arg !== 'number') ? 1 : arg;
-      this.counter += amount;
-      this.message.action = 'incremented by';
-      this.message.amount = amount;
-    },
-    decrement(arg: Event | number): void {
-      const amount = (typeof arg !== 'number') ? 1 : arg;
-      this.counter -= amount;
-      this.message.action = 'decremented by';
-      this.message.amount = amount;
-    },
-    reset(): void {
-      this.counter = this.initCounter;
-      this.message.action = 'reset';
-      this.message.amount = null;
-    },
+    loadIframe(): void {
+      console.log('loadIframe');
+    }
   },
 });
 </script>
 
 <template>
   <div class="jitsi-meet-vue-sdk-sample">
-    <p>The counter was {{ changedBy }} to <b>{{ counter }}</b>.</p>
-    <button @click="increment">
-      Click +1
+    <button @click="loadIframe">
+      Load Iframe
     </button>
-    <button @click="decrement">
-      Click -1
-    </button>
-    <button @click="increment(5)">
-      Click +5
-    </button>
-    <button @click="decrement(5)">
-      Click -5
-    </button>
-    <button @click="reset">
-      Reset
-    </button>
+    <!-- <script src='https://meet.jit.si/external_api.js'></script> -->
+    <!-- <iframe src="https://www.youtube.com/embed/yOP5-3_WFus" width="400" height="100" style="border:none; background:white;" frameborder="0" scrolling="no"></iframe> -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/yOP5-3_WFus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </template>
 
