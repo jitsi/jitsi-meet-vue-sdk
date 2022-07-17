@@ -13,6 +13,6 @@ export default defineComponent({
 
 <template>
   <div id="app">
-    <jitsi-meet-vue-sdk-sample />
+    <jitsi-meeting />
   </div>
 </template>
