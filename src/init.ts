@@ -8,13 +8,15 @@ if (window.JitsiMeetExternalAPI) {
     return resolve(window.JitsiMeetExternalAPI);
 }
 
-const script: HTMLScriptElement = document.createElement('script');
+const externalApiScript: HTMLScriptElement = document.createElement('script');
 
-script.async = true;
-script.src = `https://${domain}/external_api.js`;
-script.onload = () => resolve(window.JitsiMeetExternalAPI);
-script.onerror = () => reject(new Error(`Script load error: ${script.src}`));
-document.head.appendChild(script as Node);
+externalApiScript.async = true;
+externalApiScript.src = `https://${domain}/external_api.js`;
+
+externalApiScript.onload = () => resolve(window.JitsiMeetExternalAPI);
+externalApiScript.onerror = () => reject(new Error(`Script load error: ${externalApiScript.src}`));
+
+document.head.appendChild(externalApiScript as Node);
 });
 
 let scriptPromise: Promise<JitsiMeetExternalApi>;
