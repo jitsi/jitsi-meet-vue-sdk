@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { defineProps, DefineComponent } from 'vue';
-// import { DEFAULT_DOMAIN } from '@/constants';
+import { defineProps, withDefaults, DefineComponent } from 'vue';
+import { DEFAULT_DOMAIN } from '@/constants';
 // import { generateComponentId } from '@/utils';
+// import { IJitsiMeetingProps } from '@/types';
 
-
-
-//reason for this https://github.com/vuejs/core/issues/4294
-const props = withDefaults(defineProps<{
+export interface IJitsiMeetingProps {
   /**
      * The domain used to build the conference URL.
      */
@@ -94,10 +92,12 @@ const props = withDefaults(defineProps<{
    * The parent node used by the IFrame.
    */
   getIFrameRef?: (parentNode: HTMLDivElement) => void;
-}>(), {
-  domain: 'hello'
+}
+
+//reason for this https://github.com/vuejs/core/issues/4294
+const props = withDefaults(defineProps<IJitsiMeetingProps>(), {
+  domain: DEFAULT_DOMAIN,
 });
-// const { domain } = toRefs(props);
 
 console.log(props);
 // console.log(domain);

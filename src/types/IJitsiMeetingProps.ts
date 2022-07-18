@@ -1,5 +1,7 @@
 /* eslint-disable-next-line */
-import { JitsiMeeting } from '..';
+// import { JitsiMeeting } from '@/lib-components/jitsi-meeting.vue';
+import JitsiMeeting from '@/entry.esm';
+
 import IMeetingProps from './IMeetingProps';
 
 /**

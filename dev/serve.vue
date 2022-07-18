@@ -13,9 +13,8 @@ export default defineComponent({
 
 <template>
   <div id="app">
-    <JitsiMeeting 
-      domain="helljuytyuo"
-      roomName="hee"
+    <JitsiMeeting
+      roomName="Room one"
     />
   </div>
 </template>
