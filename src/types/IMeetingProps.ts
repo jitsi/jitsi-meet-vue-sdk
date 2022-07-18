@@ -1,9 +1,10 @@
-// import React from 'react';
+// import Vue, { VueElement } from 'vue';
+import { DefineComponent } from 'vue';
 
 import IJitsiMeetExternalApi from './IJitsiMeetExternalApi';
 
 /**
- * The the base props for React {@code Components} that load the Jitsi Meet IFrame.
+ * The the base props for Vue {@code Components} that load the Jitsi Meet IFrame.
  */
 export default interface IMeetingProps {
 
@@ -74,7 +75,7 @@ export default interface IMeetingProps {
     /**
      * The custom spinner to be displayed while the iframe is loading.
      */
-    spinner?: React.ElementType;
+    spinner?: DefineComponent;
 
     /**
      * The external API reference for events and commands.
