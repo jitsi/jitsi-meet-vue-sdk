@@ -14,6 +14,7 @@ export default defineComponent({
 <template>
   <div id="app">
     <JitsiMeeting
+      
       roomName="Room one"
     />
   </div>

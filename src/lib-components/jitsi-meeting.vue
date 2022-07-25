@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { defineProps, withDefaults, DefineComponent } from 'vue';
+import { defineProps, withDefaults, DefineComponent, onMounted, ref } from 'vue';
 import { DEFAULT_DOMAIN } from '@/constants';
-// import { generateComponentId } from '@/utils';
+import { generateComponentId } from '@/utils';
 // import { IJitsiMeetingProps } from '@/types';
+import { JitsiMeetExternalApi, IJitsiMeetExternalApi } from '@/types';
+import { fetchExternalApi } from '@/init';
 
 export interface IJitsiMeetingProps {
   /**
@@ -99,35 +101,74 @@ const props = withDefaults(defineProps<IJitsiMeetingProps>(), {
   domain: DEFAULT_DOMAIN,
 });
 
-console.log(props);
-// console.log(domain);
+const {
+  domain,
+  roomName,
+  configOverwrite,
+  interfaceConfigOverwrite,
+  jwt,
+  invitees,
+  devices,
+  userInfo
+} = props;
+
+const componentId = ref<string>('');
+const loading = ref<boolean>(false);
+const apiLoaded = ref<boolean>(false);
+const externalApi = ref<JitsiMeetExternalApi>();
+const apiRef = ref<IJitsiMeetExternalApi>();
+const meetingRef = ref<HTMLDivElement>();
 
 
-// const componentId = ref<string>('');
-// const loading = ref<boolean>(false);
-// const apiLoaded = ref<boolean>(false);
-// const externalApi = ref<string>('');
+onMounted(() => {
+  componentId.value = generateComponentId('jitsiMeeting');
 
-// interface JitsiMeetingData {
-//   componentId: string,
-//   loading: boolean,
-//   apiLoaded: boolean,
-//   externalApi: string,
-// }
+  fetchExternalApi(domain)
+    .then((api: JitsiMeetExternalApi) => {
+      externalApi.value = api;
+      apiLoaded.value = true;
+
+      loadIframe(externalApi.value);
+    })
+    .catch((e: Error) => console.error(e.message));
+});
 
 
-// export default /*#__PURE__*/defineComponent({
-//   name: 'JitsiMeeting',
-//   setup(props){
-//     console.log(props);
-//   }
-// });
+const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
+  apiRef.value = new JitsiMeetExternalAPI(domain, {
+    roomName,
+    configOverwrite,
+    interfaceConfigOverwrite,
+    jwt,
+    invitees,
+    devices,
+    userInfo,
+    parentNode: meetingRef.value
+  });
+
+  loading.value = false;
+
+  if (apiRef.value) {
+
+    console.log('hello start');
+    console.log(apiRef.value);
+    // console.log(onA)
+    console.log('hello end');
+
+  }
+};
 </script>
 
 <template>
   <div class="jitsi-meeting">
-    <div>
+    <!-- <div>
       {{ domain }}
+    </div> -->
+
+    <div>
+      {{ componentId }}
+      {{ loading }}
+      {{ apiLoaded }}
     </div>
   </div>
 </template>
