@@ -1,21 +1,29 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 // Uncomment import and local "components" registration if library is not registered globally.
 // import { JitsiMeeting } from '@/entry.esm';
+import { IJitsiMeetExternalApi } from '@/types';
+const name = ref<string>('Daniel Adedeji');
 
-export default defineComponent({
-  name: 'ServeDev',
-  // components: {
-  //  JitsiMeeting,
-  // }
-});
+const handleApiOnReady = (externalApi: IJitsiMeetExternalApi) => {
+  console.log('I am ready');
+  // console.log(externalApi);
+};
+
+const handleReadyToClose =  () => {
+  console.log('Ready to close');
+
+};
 </script>
 
 <template>
   <div id="app">
     <JitsiMeeting
-      
-      roomName="Room one"
+      :roomName="name"
+      :width="700"
+      :height="500"
+      @on-api-ready="handleApiOnReady"
+      @on-ready-to-close="handleReadyToClose"
     />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, withDefaults, DefineComponent, onMounted, ref } from 'vue';
+import { defineProps, defineEmits, withDefaults, DefineComponent, onMounted, ref } from 'vue';
 import { DEFAULT_DOMAIN } from '@/constants';
 import { generateComponentId } from '@/utils';
 // import { IJitsiMeetingProps } from '@/types';
@@ -8,13 +8,30 @@ import { fetchExternalApi } from '@/init';
 
 export interface IJitsiMeetingProps {
   /**
-     * The domain used to build the conference URL.
-     */
+   * The domain used to build the conference URL.
+  */
   domain?: string;
+
   /**
-     * The name of the room to join.
-     */
+    * The name of the room to join.
+  */
   roomName: string;
+
+  /**
+   * The created IFrame width.
+   * The width argument has the following characteristics:
+   * A numerical value indicates the width in pixel units.
+   * If a string is specified the format is a number followed by px, em, pt, or %
+  */
+  width: number | string,
+
+  /**
+   * The height for the created IFrame.
+   * The height argument has the following characteristics:
+   * A numerical value indicates the height in pixel units.
+   * If a string is specified the format is a number followed by px, em, pt, or %.
+  */
+  height: number | string,
 
   /**
    * The JS object with overrides for options defined in the config.js file
@@ -99,11 +116,20 @@ export interface IJitsiMeetingProps {
 //reason for this https://github.com/vuejs/core/issues/4294
 const props = withDefaults(defineProps<IJitsiMeetingProps>(), {
   domain: DEFAULT_DOMAIN,
+  width: 600,
+  height: 400
 });
+
+const emit = defineEmits<{
+  (e: 'onApiReady', externalApi: IJitsiMeetExternalApi): void,
+  (e: 'onReadyToClose'): void
+}>();
 
 const {
   domain,
   roomName,
+  width,
+  height,
   configOverwrite,
   interfaceConfigOverwrite,
   jwt,
@@ -137,23 +163,29 @@ onMounted(() => {
 const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
   apiRef.value = new JitsiMeetExternalAPI(domain, {
     roomName,
+    width,
+    height,
     configOverwrite,
     interfaceConfigOverwrite,
     jwt,
     invitees,
     devices,
     userInfo,
-    parentNode: meetingRef.value
+    parentNode: meetingRef.value,
   });
 
   loading.value = false;
 
   if (apiRef.value) {
+    emit('onApiReady', apiRef.value);
 
-    console.log('hello start');
-    console.log(apiRef.value);
-    // console.log(onA)
-    console.log('hello end');
+    apiRef.value.on('readyToClose', () => {
+      emit('onReadyToClose');
+    });
+
+    // if (meetingRef.current && typeof getIFrameRef === 'function') {
+    //     getIFrameRef(meetingRef.current);
+    // }
 
   }
 };
@@ -166,6 +198,7 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
     </div> -->
 
     <div>
+      {{ roomName }}
       {{ componentId }}
       {{ loading }}
       {{ apiLoaded }}
