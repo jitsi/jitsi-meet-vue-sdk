@@ -4,7 +4,7 @@
     "browser": true
   },
   "extends": [
-    "plugin:vue/strongly-recommended",
+    // "plugin:vue/strongly-recommended",
     "eslint:recommended",
     // "plugin:vue/recommended"
     "plugin:vue/vue3-recommended",
@@ -21,6 +21,7 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "vue/no-multiple-template-root": "off"
+    "vue/no-multiple-template-root": "off",
+    "vue/no-setup-props-destructure": "off"
   }
 }
