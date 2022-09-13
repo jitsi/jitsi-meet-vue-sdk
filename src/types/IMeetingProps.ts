@@ -1,94 +1,91 @@
 // import Vue, { VueElement } from 'vue';
-import { DefineComponent } from 'vue';
+import { DefineComponent } from "vue";
 
-import IJitsiMeetExternalApi from './IJitsiMeetExternalApi';
+import IJitsiMeetExternalApi from "./IJitsiMeetExternalApi";
 
 /**
  * The the base props for Vue {@code Components} that load the Jitsi Meet IFrame.
  */
 export default interface IMeetingProps {
+  /**
+   * The name of the room to join.
+   */
+  roomName: string;
+
+  /**
+   * The JS object with overrides for options defined in the config.js file
+   * https://github.com/jitsi/jitsi-meet/blob/master/config.js.
+   */
+  configOverwrite?: object;
+
+  /**
+   * The JS object with overrides for options defined in the interface_config.js file
+   * https://github.com/jitsi/jitsi-meet/blob/master/interface_config.js.
+   */
+  interfaceConfigOverwrite?: object;
+
+  /**
+   * The JWT token.
+   */
+  jwt?: string;
+
+  /**
+   * Object arrays that contain information about participants invited to a call.
+   */
+  invitees?: [];
+
+  /**
+   * Information map about the devices used in a call.
+   */
+  devices?: {
+    /**
+     * The label of the device used for audio input.
+     */
+    audioInput: string;
 
     /**
-     * The name of the room to join.
+     * The label of the device  used for audio output.
      */
-    roomName: string;
+    audioOutput: string;
 
     /**
-     * The JS object with overrides for options defined in the config.js file
-     * https://github.com/jitsi/jitsi-meet/blob/master/config.js.
+     * The label of the device used for video input.
      */
-    configOverwrite?: object;
+    videoInput: string;
+  };
+
+  /**
+   * The JS object that contains information about the participant starting the meeting.
+   */
+  userInfo?: {
+    /**
+     * The participant display name.
+     */
+    displayName: string;
 
     /**
-     * The JS object with overrides for options defined in the interface_config.js file
-     * https://github.com/jitsi/jitsi-meet/blob/master/interface_config.js.
+     * The participant email address.
      */
-    interfaceConfigOverwrite?: object;
+    email: string;
+  };
 
-    /**
-     * The JWT token.
-     */
-    jwt?: string;
+  /**
+   * The custom spinner to be displayed while the iframe is loading.
+   */
+  spinner?: DefineComponent;
 
-    /**
-     * Object arrays that contain information about participants invited to a call.
-     */
-    invitees?: [];
+  /**
+   * The external API reference for events and commands.
+   */
+  onApiReady?: (api: IJitsiMeetExternalApi) => void;
 
-    /**
-     * Information map about the devices used in a call.
-     */
-    devices?: {
+  /**
+   * The callback for when the meeting is ready to be closed.
+   */
+  onReadyToClose?: () => void;
 
-        /**
-         * The label of the device used for audio input.
-         */
-        audioInput: string;
-
-        /**
-         * The label of the device  used for audio output.
-         */
-        audioOutput: string;
-
-        /**
-         * The label of the device used for video input.
-         */
-        videoInput: string;
-    };
-
-    /**
-     * The JS object that contains information about the participant starting the meeting.
-     */
-    userInfo?: {
-
-        /**
-         * The participant display name.
-         */
-        displayName: string;
-
-        /**
-         * The participant email address.
-         */
-        email: string;
-    };
-
-    /**
-     * The custom spinner to be displayed while the iframe is loading.
-     */
-    spinner?: DefineComponent;
-
-    /**
-     * The external API reference for events and commands.
-     */
-    onApiReady?: (api: IJitsiMeetExternalApi) => void;
-
-    /**
-     * The callback for when the meeting is ready to be closed.
-     */
-    onReadyToClose?: () => void;
-
-    /**
-     * The parent node used by the IFrame.
-     */
-    getIFrameRef?: (parentNode: HTMLDivElement) => void;
+  /**
+   * The parent node used by the IFrame.
+   */
+  getIFrameRef?: (parentNode: HTMLDivElement) => void;
 }

@@ -1,20 +1,27 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults, DefineComponent, onMounted, ref } from 'vue';
-import { DEFAULT_DOMAIN } from '@/constants';
-import { generateComponentId } from '@/utils';
+import {
+  defineProps,
+  defineEmits,
+  withDefaults,
+  DefineComponent,
+  onMounted,
+  ref,
+} from "vue";
+import { DEFAULT_DOMAIN } from "@/constants";
+import { generateComponentId } from "@/utils";
 // import { IJitsiMeetingProps } from '@/types';
-import { JitsiMeetExternalApi, IJitsiMeetExternalApi } from '@/types';
-import { fetchExternalApi } from '@/init';
+import { JitsiMeetExternalApi, IJitsiMeetExternalApi } from "@/types";
+import { fetchExternalApi } from "@/init";
 
 export interface IJitsiMeetingProps {
   /**
    * The domain used to build the conference URL.
-  */
+   */
   domain?: string;
 
   /**
-    * The name of the room to join.
-  */
+   * The name of the room to join.
+   */
   roomName: string;
 
   /**
@@ -22,16 +29,16 @@ export interface IJitsiMeetingProps {
    * The width argument has the following characteristics:
    * A numerical value indicates the width in pixel units.
    * If a string is specified the format is a number followed by px, em, pt, or %
-  */
-  width: number | string,
+   */
+  width: number | string;
 
   /**
    * The height for the created IFrame.
    * The height argument has the following characteristics:
    * A numerical value indicates the height in pixel units.
    * If a string is specified the format is a number followed by px, em, pt, or %.
-  */
-  height: number | string,
+   */
+  height: number | string;
 
   /**
    * The JS object with overrides for options defined in the config.js file
@@ -59,7 +66,6 @@ export interface IJitsiMeetingProps {
    * Information map about the devices used in a call.
    */
   devices?: {
-
     /**
      * The label of the device used for audio input.
      */
@@ -80,7 +86,6 @@ export interface IJitsiMeetingProps {
    * The JS object that contains information about the participant starting the meeting.
    */
   userInfo?: {
-
     /**
      * The participant display name.
      */
@@ -117,12 +122,12 @@ export interface IJitsiMeetingProps {
 const props = withDefaults(defineProps<IJitsiMeetingProps>(), {
   domain: DEFAULT_DOMAIN,
   width: 600,
-  height: 400
+  height: 400,
 });
 
 const emit = defineEmits<{
-  (e: 'onApiReady', externalApi: IJitsiMeetExternalApi): void,
-  (e: 'onReadyToClose'): void
+  (e: "onApiReady", externalApi: IJitsiMeetExternalApi): void;
+  (e: "onReadyToClose"): void;
 }>();
 
 const {
@@ -135,19 +140,18 @@ const {
   jwt,
   invitees,
   devices,
-  userInfo
+  userInfo,
 } = props;
 
-const componentId = ref<string>('');
+const componentId = ref<string>("");
 const loading = ref<boolean>(false);
 const apiLoaded = ref<boolean>(false);
 const externalApi = ref<JitsiMeetExternalApi>();
 const apiRef = ref<IJitsiMeetExternalApi>();
 const meetingRef = ref<HTMLDivElement>();
 
-
 onMounted(() => {
-  componentId.value = generateComponentId('jitsiMeeting');
+  componentId.value = generateComponentId("jitsiMeeting");
 
   fetchExternalApi(domain)
     .then((api: JitsiMeetExternalApi) => {
@@ -158,7 +162,6 @@ onMounted(() => {
     })
     .catch((e: Error) => console.error(e.message));
 });
-
 
 const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
   apiRef.value = new JitsiMeetExternalAPI(domain, {
@@ -177,16 +180,15 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
   loading.value = false;
 
   if (apiRef.value) {
-    emit('onApiReady', apiRef.value);
+    emit("onApiReady", apiRef.value);
 
-    apiRef.value.on('readyToClose', () => {
-      emit('onReadyToClose');
+    apiRef.value.on("readyToClose", () => {
+      emit("onReadyToClose");
     });
 
     // if (meetingRef.current && typeof getIFrameRef === 'function') {
     //     getIFrameRef(meetingRef.current);
     // }
-
   }
 };
 </script>
@@ -206,5 +208,4 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
