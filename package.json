@@ -19,7 +19,8 @@
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
-    "postbuild": "rimraf ./dist/types/dev ./dist/types/src/entry.d.ts"
+    "postbuild": "rimraf ./dist/types/dev ./dist/types/src/entry.d.ts",
+    "lint": "eslint src --ext .ts,.vue"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -30,10 +31,13 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-replace": "^2.4.2",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
     "@vue/cli-plugin-babel": "^4.5.13",
     "@vue/cli-plugin-typescript": "^4.5.13",
     "@vue/cli-service": "^4.5.13",
     "@vue/compiler-sfc": "^3.0.11",
+    "@vue/eslint-config-typescript": "^11.0.1",
     "@zerollup/ts-transform-paths": "^1.7.18",
     "cross-env": "^7.0.3",
     "eslint": "^8.23.0",
@@ -50,27 +54,13 @@
     "rollup-plugin-vue": "^6.0.0",
     "ttypescript": "^1.5.12",
     "typescript": "^4.0.3",
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vue-eslint-parser": "^9.1.0"
   },
   "peerDependencies": {
     "vue": "^3.0.5"
   },
   "engines": {
     "node": ">=12"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "plugin:prettier/recommended",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
   }
 }
