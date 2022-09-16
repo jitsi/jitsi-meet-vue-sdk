@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 // Uncomment import and local "components" registration if library is not registered globally.
-// import { JitsiMeeting } from '@/entry.esm';
+import { JitsiMeeting } from '@/entry.esm';
+
 import { IJitsiMeetExternalApi } from '@/types';
 const name = ref<string>('Daniel Adedeji');
 
 const handleApiOnReady = (externalApi: IJitsiMeetExternalApi) => {
   console.log('I am ready');
-  // console.log(externalApi);
+  console.log(externalApi);
 };
 
 const handleReadyToClose =  () => {
   console.log('Ready to close');
 
 };
+
+const getIframeRefOnApiReady = (parentNode: HTMLDivElement) => {
+  console.log('parent iframe')
+}
 </script>
 
 <template>
@@ -24,6 +29,7 @@ const handleReadyToClose =  () => {
       :height="500"
       @on-api-ready="handleApiOnReady"
       @on-ready-to-close="handleReadyToClose"
+      @get-iframe-ref-on-api-ready="getIframeRefOnApiReady"
     />
   </div>
 </template>

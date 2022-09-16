@@ -110,12 +110,17 @@ export interface IJitsiMeetingProps {
   /**
    * The callback for when the meeting is ready to be closed.
    */
-  onReadyToClose?: () => void;
+  // onReadyToClose?: () => void;
 
   /**
    * The parent node used by the IFrame.
    */
-  getIFrameRef?: (parentNode: HTMLDivElement) => void;
+  // getIFrameRef?: (parentNode: HTMLDivElement) => void;
+
+  /**
+   * The default meeting language
+   */
+  lang?: string;
 }
 
 //reason for this https://github.com/vuejs/core/issues/4294
@@ -123,13 +128,16 @@ const props = withDefaults(defineProps<IJitsiMeetingProps>(), {
   domain: DEFAULT_DOMAIN,
   width: 600,
   height: 400,
+  lang: "en",
 });
 
 const emit = defineEmits<{
   (e: "onApiReady", externalApi: IJitsiMeetExternalApi): void;
   (e: "onReadyToClose"): void;
+  (e: "getIframeRefOnApiReady", parentNode: HTMLDivElement): void;
 }>();
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const {
   domain,
   roomName,
@@ -141,6 +149,7 @@ const {
   invitees,
   devices,
   userInfo,
+  lang,
 } = props;
 
 const componentId = ref<string>("");
@@ -148,7 +157,7 @@ const loading = ref<boolean>(false);
 const apiLoaded = ref<boolean>(false);
 const externalApi = ref<JitsiMeetExternalApi>();
 const apiRef = ref<IJitsiMeetExternalApi>();
-const meetingRef = ref<HTMLDivElement>();
+const meetingRef = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
   componentId.value = generateComponentId("jitsiMeeting");
@@ -175,6 +184,7 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
     devices,
     userInfo,
     parentNode: meetingRef.value,
+    lang,
   });
 
   loading.value = false;
@@ -186,26 +196,18 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
       emit("onReadyToClose");
     });
 
-    // if (meetingRef.current && typeof getIFrameRef === 'function') {
-    //     getIFrameRef(meetingRef.current);
-    // }
+    if (meetingRef.value) {
+      emit("getIframeRefOnApiReady", meetingRef.value);
+    }
   }
 };
 </script>
 
 <template>
-  <div class="jitsi-meeting">
-    <!-- <div>
-      {{ domain }}
-    </div> -->
-
-    <div>
-      {{ roomName }}
-      {{ componentId }}
-      {{ loading }}
-      {{ apiLoaded }}
-    </div>
+  <div :id="componentId" :key="componentId" ref="meetingRef">
+    {{ roomName }}
+    {{ componentId }}
+    {{ loading }}
+    {{ apiLoaded }}
   </div>
 </template>
-
-<style scoped></style>

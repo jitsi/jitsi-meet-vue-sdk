@@ -35,7 +35,8 @@
             "dom",
             "dom.iterable",
             "scripthost"
-        ]
+        ],
+        "jsx": "preserve"
     },
     "exclude": [
         "node_modules",

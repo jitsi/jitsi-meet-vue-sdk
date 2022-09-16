@@ -92,6 +92,11 @@ export type JitsiMeetExternalApi = {
        * The HTML DOM Element where the IFrame is added as a child.
        */
       parentNode?: HTMLDivElement | null;
+
+      /**
+       * The default meeting language
+       */
+      lang?: string;
     }
   ): IJitsiMeetExternalApi;
 };
