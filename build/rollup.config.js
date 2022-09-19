@@ -41,6 +41,7 @@ const baseConfig = {
       }),
     ],
     replace: {
+      preventAssignment: true,
       'process.env.NODE_ENV': JSON.stringify('production'),
     },
     vue: {
@@ -107,6 +108,7 @@ if (!argv.format || argv.format === 'es') {
         typescript: ttypescript,
         useTsconfigDeclarationDir: true,
         emitDeclarationOnly: true,
+        check: false
       }),
       babel({
         ...baseConfig.plugins.babel,

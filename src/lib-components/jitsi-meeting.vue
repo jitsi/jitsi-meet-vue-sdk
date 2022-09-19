@@ -118,26 +118,6 @@ export interface IJitsiMeetingProps {
   };
 
   /**
-   * The custom spinner to be displayed while the iframe is loading.
-   */
-  // spinner?: DefineComponent;
-
-  /**
-   * The external API reference for events and commands.
-   */
-  // onApiReady?: (api: IJitsiMeetExternalApi) => void;
-
-  /**
-   * The callback for when the meeting is ready to be closed.
-   */
-  // onReadyToClose?: () => void;
-
-  /**
-   * The parent node used by the IFrame.
-   */
-  // getIFrameRef?: (parentNode: HTMLDivElement) => void;
-
-  /**
    * The default meeting language
    */
   lang?: string;

@@ -9,3 +9,4 @@ export { JitsiMeetExternalApi } from "./JitsiMeetExternalApi";
 export { default as IJitsiMeetingProps } from "./IJitsiMeetingProps";
 export { default as IJaaSMeetingProps } from "./IJaaSMeetingProps";
 export { default as IJitsiMeetExternalApi } from "./IJitsiMeetExternalApi";
+export { default as IMeetingProps } from "./IMeetingProps";

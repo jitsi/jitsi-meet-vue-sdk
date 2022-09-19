@@ -1,11 +1,12 @@
 // import Vue, { VueElement } from 'vue';
-import { DefineComponent } from "vue";
+// import { DefineComponent } from "vue";
 
-import IJitsiMeetExternalApi from "./IJitsiMeetExternalApi";
+// import IJitsiMeetExternalApi from "./IJitsiMeetExternalApi";
 
 /**
  * The the base props for Vue {@code Components} that load the Jitsi Meet IFrame.
  */
+
 export default interface IMeetingProps {
   /**
    * The name of the room to join.
@@ -70,22 +71,7 @@ export default interface IMeetingProps {
   };
 
   /**
-   * The custom spinner to be displayed while the iframe is loading.
+   * The default meeting language
    */
-  spinner?: DefineComponent;
-
-  /**
-   * The external API reference for events and commands.
-   */
-  onApiReady?: (api: IJitsiMeetExternalApi) => void;
-
-  /**
-   * The callback for when the meeting is ready to be closed.
-   */
-  onReadyToClose?: () => void;
-
-  /**
-   * The parent node used by the IFrame.
-   */
-  getIFrameRef?: (parentNode: HTMLDivElement) => void;
+  lang?: string;
 }

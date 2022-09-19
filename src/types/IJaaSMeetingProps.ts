@@ -3,7 +3,7 @@
 import IMeetingProps from "./IMeetingProps";
 
 /**
- * The type of the React {@code Component} props of {@link JaaSMeeting}.
+ * The type of the Vue {@code Component} props of {@link JaaSMeeting}.
  */
 export default interface IJaaSMeetingProps extends IMeetingProps {
   /**

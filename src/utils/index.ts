@@ -30,10 +30,11 @@ export const getJaaSDomain = (useStaging?: boolean): string => {
   return JAAS_PROD_DOMAIN;
 };
 
+let instancesCounter = 0;
 /**
  * Generates a unique id
  * @param {string} prefix
  * @returns {string} the component id
  */
 export const generateComponentId = (prefix: string): string =>
-  `${prefix}-${Date.now()}`;
+  `${prefix}-${instancesCounter++}`;
