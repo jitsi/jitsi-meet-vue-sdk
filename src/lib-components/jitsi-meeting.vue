@@ -3,7 +3,7 @@ import {
   defineProps,
   defineEmits,
   withDefaults,
-  DefineComponent,
+  // DefineComponent,
   onMounted,
   ref,
 } from "vue";
@@ -100,7 +100,7 @@ export interface IJitsiMeetingProps {
   /**
    * The custom spinner to be displayed while the iframe is loading.
    */
-  spinner?: DefineComponent;
+  // spinner?: DefineComponent;
 
   /**
    * The external API reference for events and commands.
@@ -204,6 +204,7 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
 </script>
 
 <template>
+  <slot v-if="loading || !apiRef" name="spinner"> loading......... </slot>
   <div :id="componentId" :key="componentId" ref="meetingRef">
     {{ roomName }}
     {{ componentId }}
