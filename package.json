@@ -1,7 +1,7 @@
 {
   "name": "jitsi-meet-vue-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Vue SDK for the Jitsi Meet IFrame",
   "main": "dist/jitsi-meet-vue-sdk.ssr.js",
   "browser": "dist/jitsi-meet-vue-sdk.esm.js",
   "module": "dist/jitsi-meet-vue-sdk.esm.js",
@@ -11,6 +11,15 @@
     "dist/*",
     "src/**/*.vue"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jitsi/vue-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jitsi/vue-sdk/issues"
+  },
+  "homepage": "https://github.com/jitsi/vue-sdk#readme",
   "sideEffects": false,
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.ts",
