@@ -6,6 +6,7 @@ import {
   // DefineComponent,
   onMounted,
   ref,
+  nextTick,
 } from "vue";
 import { DEFAULT_DOMAIN } from "@/constants";
 import { generateComponentId } from "@/utils";
@@ -163,10 +164,11 @@ onMounted(() => {
   componentId.value = generateComponentId("jitsiMeeting");
 
   fetchExternalApi(domain)
-    .then((api: JitsiMeetExternalApi) => {
+    .then(async (api: JitsiMeetExternalApi) => {
       externalApi.value = api;
       apiLoaded.value = true;
 
+      await nextTick();
       loadIframe(externalApi.value);
     })
     .catch((e: Error) => console.error(e.message));

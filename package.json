@@ -1,5 +1,5 @@
 {
-  "name": "jitsi-meet-vue-sdk",
+  "name": "@jitsi/vue-sdk",
   "version": "1.0.0",
   "description": "Vue SDK for the Jitsi Meet IFrame",
   "main": "dist/jitsi-meet-vue-sdk.ssr.js",

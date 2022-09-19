@@ -6,7 +6,7 @@ import { ref } from 'vue';
 //    JaaSMeeting 
 //   } from '@/entry.esm';
 
-import JitsiMeeting from '@/lib-components/jitsi-meeting.vue';
+// import JitsiMeeting from '@/lib-components/jitsi-meeting.vue';
 import JaasMeeting from '@/lib-components/jaas-meeting.vue';
 
 
@@ -17,7 +17,7 @@ import { IJitsiMeetExternalApi } from '@/types';
 const name = ref<string>('Daniel Adedeji');
 
 const handleApiOnReady = (externalApi: IJitsiMeetExternalApi) => {
-  console.log('I am ready');
+  console.log('Jisti is ready ready');
   console.log(externalApi);
 };
 
@@ -34,7 +34,7 @@ const getIframeRefOnApiReady = (parentNode: HTMLDivElement) => {
 
 <template>
   <div id="app">
-    <JitsiMeeting
+    <!-- <JitsiMeeting
       :roomName="name"
       :width="400"
       :height="400"
@@ -43,7 +43,7 @@ const getIframeRefOnApiReady = (parentNode: HTMLDivElement) => {
       @get-iframe-ref-on-api-ready="getIframeRefOnApiReady"
     >
       <template v-slot:spinner>Hello.....</template>
-    </JitsiMeeting>
+    </JitsiMeeting> -->
 
     <JaasMeeting 
       @on-api-ready="handleApiOnReady" 
