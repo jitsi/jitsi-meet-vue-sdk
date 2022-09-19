@@ -141,5 +141,9 @@ Callback triggered when the meeting is ready to be closed.
 ## Sample
 Install and run the project from the `example` directory to see the JitsiMeeting module in action.
 ```bash
-npm run demo
+npm run install
+```
+then
+```bash
+npm run dev
 ```
