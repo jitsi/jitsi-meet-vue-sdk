@@ -139,11 +139,23 @@ Callback triggered when the meeting is ready to be closed.
 ```
 
 ## Sample
+
+Run npm link in the root folder
+```bash
+npm link
+```
+
+Navigate to the `example` directory and run this commands
+```bash
+npm link @jitsi/vue-sdk
+```
+
 Install and run the project from the `example` directory to see the JitsiMeeting module in action.
 ```bash
 npm run install
 ```
-then
+
+###
 ```bash
 npm run dev
 ```
