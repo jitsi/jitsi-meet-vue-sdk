@@ -13,6 +13,26 @@ import { generateComponentId } from "@/utils";
 import { JitsiMeetExternalApi, IJitsiMeetExternalApi } from "@/types";
 import { fetchExternalApi } from "@/init";
 
+/**
+ * Returns the JitsiMeeting Component with access to a custom External API
+ * to be used as-it-is in React projects
+ *
+ * @param {IJitsiMeetingProps} props the component's props
+ * @returns {VueComponent} the `JitsiMeeting` Component
+ * @example
+  ```js
+    <JitsiMeeting
+      :roomName="name"
+      :width="700"
+      :height="500"
+      @on-api-ready="handleApiOnReady"
+      @on-ready-to-close="handleReadyToClose"
+      @get-iframe-ref-on-api-ready="getIframeRefOnApiReady"
+    >
+      <template v-slot:spinner></template>
+    </JitsiMeeting>
+  ```
+ */
 export interface IJitsiMeetingProps {
   /**
    * The domain used to build the conference URL.
@@ -204,11 +224,6 @@ const loadIframe = (JitsiMeetExternalAPI: JitsiMeetExternalApi) => {
 </script>
 
 <template>
-  <slot v-if="loading || !apiRef" name="spinner"> loading......... </slot>
-  <div :id="componentId" :key="componentId" ref="meetingRef">
-    {{ roomName }}
-    {{ componentId }}
-    {{ loading }}
-    {{ apiLoaded }}
-  </div>
+  <slot v-if="loading || !apiRef" name="spinner"></slot>
+  <div :id="componentId" :key="componentId" ref="meetingRef"></div>
 </template>

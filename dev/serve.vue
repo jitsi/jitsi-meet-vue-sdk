@@ -21,6 +21,7 @@ const getIframeRefOnApiReady = (parentNode: HTMLDivElement) => {
 }
 </script>
 
+
 <template>
   <div id="app">
     <JitsiMeeting
@@ -31,9 +32,7 @@ const getIframeRefOnApiReady = (parentNode: HTMLDivElement) => {
       @on-ready-to-close="handleReadyToClose"
       @get-iframe-ref-on-api-ready="getIframeRefOnApiReady"
     >
-    <template v-slot:spinner>
-      Hello world
-    </template>
+      <template v-slot:spinner></template>
     </JitsiMeeting>
   </div>
 </template>
