@@ -145,7 +145,7 @@ Run npm link in the root folder
 npm link
 ```
 
-Navigate to the `example` directory and run this commands
+Navigate to the `example` directory and run this command
 ```bash
 npm link @jitsi/vue-sdk
 ```
