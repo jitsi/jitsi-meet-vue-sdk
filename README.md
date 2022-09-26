@@ -1,7 +1,7 @@
 
 # Jitsi Meet Vue SDK
 
-The Jitsi Meet Vue SDK provides the same user experience as the [Jitsi Meet](https://github.com/jitsi/jitsi-meet) app, in a customizable way which you can embed in your vue js app.
+The Jitsi Meet Vue SDK provides the same user experience as the [Jitsi Meet](https://github.com/jitsi/jitsi-meet) app, in a customizable way which you can embed in your Vue.js app.
 
   
 
