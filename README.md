@@ -3,12 +3,6 @@
 
 The Jitsi Meet Vue SDK provides the same user experience as the [Jitsi Meet](https://github.com/jitsi/jitsi-meet) app, in a customizable way which you can embed in your Vue.js app.
 
-  
-
-###### Inspiration and code idea gotten from
-
-https://github.com/jitsi/jitsi-meet-react-sdk
-
 ## Install
 
 ```bash
@@ -308,3 +302,7 @@ npm install
 npm run dev
 
 ```
+
+## Acknowledgements
+
+This module is modeled after: https://github.com/jitsi/jitsi-meet-react-sdk
