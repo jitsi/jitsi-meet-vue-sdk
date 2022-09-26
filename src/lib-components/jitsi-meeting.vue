@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import {
-  defineProps,
-  defineEmits,
   withDefaults,
   // DefineComponent,
   onMounted,

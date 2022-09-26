@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  defineProps,
-  // defineEmits,
-  withDefaults,
-  // onMounted,
-  ref,
-} from "vue";
+import { withDefaults, ref } from "vue";
 import { getJaaSDomain, getRoomName } from "@/utils";
 import { JitsiMeeting } from "./index";
 
