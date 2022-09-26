@@ -296,7 +296,7 @@ Install and run the project from the `example` directory to see the JitsiMeeting
 
 ```bash
 
-npm run install
+npm install
 
 ```
 
