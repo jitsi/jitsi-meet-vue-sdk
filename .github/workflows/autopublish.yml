@@ -12,9 +12,9 @@ jobs:
 
     steps:
       - name: "Checkout source code"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5"  # v2
       - name: "Automated Release"
-        uses: "jitsi/gh-action-autopublish@master"
+        uses: "jitsi/gh-action-autopublish@b09de7a9bce8ec799c557c7cb3326103f33cebfc"  # master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
